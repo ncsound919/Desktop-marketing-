@@ -1,0 +1,363 @@
+```json
+{
+  "project": {
+    "name": "Astra Marketing Workbench",
+    "type": "Desktop Application",
+    "architecture": "Offline-First with Cloud Sync",
+    "core_philosophy": "Self-contained analytical workstation using 16 mathematical formulas for predictive marketing"
+  },
+  
+  "tech_stack": {
+    "frontend": {
+      "framework": "React",
+      "state_management": "React Hooks",
+      "styling": "Tailwind CSS",
+      "icons": "Lucide React",
+      "tauri_integration": "@tauri-apps/api"
+    },
+    "backend": {
+      "runtime": "Tauri (Rust + WebView)",
+      "database": "SQLite with Diesel ORM",
+      "mathematical_engine": "Rust (ndarray, statrs, linfa)",
+      "sync_engine": "Custom Rust sync with WebSocket/HTTP",
+      "cloud_bridge": "Rust (Axum/Actix) + PostgreSQL"
+    },
+    "formulas": {
+      "implementation_language": "Rust",
+      "python_bindings": "For complex linear algebra",
+      "total_formulas": 16,
+      "formula_groups": [
+        "Composition & Integrity (CIM #9, Recursive IP #2)",
+        "Evolution & Conservation (GCF #10, 5000-PT #7)",
+        "Network & Diffusion (NDP #11)",
+        "Approximation & Validation (SAM #12, Tap10 #3)",
+        "Decision & Risk (PCS #4, RPS #5, PW #6)",
+        "Sensitivity & Control (One-Knob #8, Reinforcement #1)"
+      ]
+    }
+  },
+  
+  "file_structure": {
+    "root": "astra-desktop/",
+    "frontend": {
+      "src/": {
+        "components/": [
+          "MetricCard.jsx",
+          "CampaignCard.jsx",
+          "FormulaMetric.jsx",
+          "SyncStatus.jsx",
+          "OfflineIndicator.jsx",
+          "HealthIndicator.jsx"
+        ],
+        "hooks/": [
+          "useCampaigns.js",
+          "useSync.js",
+          "useFormulas.js",
+          "useLocalData.js"
+        ],
+        "tauri.js": "Tauri API bridge",
+        "main.jsx": "React entry point",
+        "AstraWorkbench.jsx": "Main component (your current code)"
+      }
+    },
+    "backend": {
+      "src-tauri/": {
+        "src/": {
+          "engine/": {
+            "mod.rs": "Module exports",
+            "composition.rs": "CIM #9, Recursive IP #2",
+            "dynamics.rs": "GCF #10, 5000-PT #7",
+            "network.rs": "NDP #11",
+            "validation.rs": "SAM #12, Tap10 #3",
+            "decision.rs": "PCS #4, RPS #5, PW #6",
+            "optimization.rs": "One-Knob #8, Reinforcement #1"
+          },
+          "database.rs": "Diesel ORM models & SQLite queries",
+          "sync.rs": "Core sync logic with OT/CRDT",
+          "cloud_bridge.rs": "HTTP/WebSocket client to server",
+          "main.rs": "Tauri entry point with command handlers"
+        },
+        "Cargo.toml": "Rust dependencies"
+      }
+    },
+    "cloud_infrastructure": {
+      "astra-cloud-bridge/": {
+        "src/": {
+          "main.rs": "Server setup",
+          "auth.rs": "User & OAuth2 token management",
+          "proxy.rs": "Sanitized proxy to 3rd-party APIs",
+          "data_fetch.rs": "Scheduled jobs to pull platform data",
+          "sync_handler.rs": "Handles sync from desktop clients"
+        },
+        "migrations/": "PostgreSQL schema"
+      }
+    }
+  },
+  
+  "formula_implementations": {
+    "Tap10_Scoring_3": {
+      "purpose": "Content ranking via Wasserstein distance",
+      "rust_function": "tap10_score(current: &[f64], ideal: &[f64], anti_ideal: &[f64]) -> f64",
+      "frontend_component": "FormulaMetric",
+      "dashboard_widget": "Content Score (8.4/10)"
+    },
+    "Compositional_Integrity_Matrix_9": {
+      "purpose": "Analyze nested system stability",
+      "rust_function": "calculate_integrity(campaign_id: i32) -> f64",
+      "frontend_component": "HealthIndicator",
+      "dashboard_widget": "Campaign Health (87%)"
+    },
+    "Network_Diffusion_Propagator_11": {
+      "purpose": "Predict content spread through networks",
+      "rust_function": "diffusion_propagator(adjacency_matrix, time, initial_activation)",
+      "frontend_component": "MetricCard",
+      "dashboard_widget": "Predicted Reach (2.8K)"
+    },
+    "Risk_Protocol_Score_5": {
+      "purpose": "Assess heavy-tailed risks via Orlicz Spaces",
+      "rust_function": "calculate_risk_score(factors: RiskFactors) -> f64",
+      "frontend_component": "FormulaMetric",
+      "dashboard_widget": "Risk Level (Low, 23%)"
+    }
+  },
+  
+  "database_schema": {
+    "tables": [
+      {
+        "name": "campaigns",
+        "columns": [
+          "id INTEGER PRIMARY KEY",
+          "name TEXT NOT NULL",
+          "json_schema TEXT", 
+          "created_at TIMESTAMP",
+          "updated_at TIMESTAMP",
+          "local_version INTEGER",
+          "cloud_version INTEGER"
+        ]
+      },
+      {
+        "name": "calendar_entries",
+        "columns": [
+          "id INTEGER PRIMARY KEY",
+          "campaign_id INTEGER REFERENCES campaigns(id)",
+          "content_hash TEXT",
+          "scheduled_time TIMESTAMP",
+          "status TEXT",
+          "formula_metadata JSON"
+        ]
+      },
+      {
+        "name": "formula_results",
+        "columns": [
+          "id INTEGER PRIMARY KEY",
+          "formula_id TEXT",
+          "input_hash TEXT",
+          "result_json TEXT",
+          "computed_at TIMESTAMP"
+        ]
+      },
+      {
+        "name": "sync_log",
+        "columns": [
+          "id INTEGER PRIMARY KEY",
+          "entity_type TEXT",
+          "entity_id INTEGER",
+          "operation TEXT",
+          "local_version INTEGER",
+          "cloud_version INTEGER",
+          "synced_at TIMESTAMP"
+        ]
+      },
+      {
+        "name": "actions_queue",
+        "columns": [
+          "id INTEGER PRIMARY KEY",
+          "action_type TEXT",
+          "payload JSON",
+          "status TEXT",
+          "created_at TIMESTAMP",
+          "processed_at TIMESTAMP"
+        ]
+      }
+    ]
+  },
+  
+  "sync_architecture": {
+    "strategy": "Dual-Phase Commit with Operational Transform",
+    "phase_1": "Core entity sync (campaigns, calendar)",
+    "phase_2": "External data fetch (platform APIs)",
+    "conflict_resolution": "Last-write-wins for metadata, OT for text",
+    "offline_handling": "Actions queued locally, executed when online",
+    "security": "OAuth tokens stored encrypted on cloud bridge only"
+  },
+  
+  "frontend_modules": {
+    "dashboard": {
+      "purpose": "Overview with formula-powered metrics",
+      "current_status": "70% complete (UI done, needs data integration)",
+      "formulas_used": ["CIM #9", "NDP #11", "RPS #5", "Tap10 #3"],
+      "next_steps": "Connect to Tauri backend for real data"
+    },
+    "studio": {
+      "purpose": "Content creation hub",
+      "current_status": "UI complete, needs local file system integration",
+      "features": ["Video editor", "Design studio", "Asset library", "Brand kit"],
+      "formulas_used": ["SAM #12 for quality validation"]
+    },
+    "canvas": {
+      "purpose": "Journey mapping with formula insights",
+      "current_status": "Placeholder UI, needs implementation",
+      "formulas_used": ["CIM #9 for connection analysis", "GCF #10 for value flow"]
+    },
+    "scheduler": {
+      "purpose": "Predictive content calendar",
+      "current_status": "Basic UI, needs formula integration",
+      "formulas_used": ["NDP #11 for reach prediction", "Tap10 #3 for content ranking"]
+    },
+    "budget": {
+      "purpose": "Risk-aware budget orchestration",
+      "current_status": "Not started",
+      "formulas_used": ["RPS #5", "One-Knob #8", "Reinforcement #1"]
+    },
+    "network": {
+      "purpose": "Partner and influencer management",
+      "current_status": "Not started",
+      "formulas_used": ["PCS #4 for partner scoring", "NDP #11 for influence mapping"]
+    },
+    "analytics": {
+      "purpose": "Customizable formula-powered dashboards",
+      "current_status": "Not started",
+      "formulas_used": "All 16 formulas available as widgets"
+    }
+  },
+  
+  "development_phases": [
+    {
+      "phase": 0,
+      "duration": "3-4 months",
+      "name": "Core & Sync Foundation",
+      "deliverables": [
+        "Tauri desktop shell",
+        "SQLite integration",
+        "Basic sync engine",
+        "Formula engine framework"
+      ],
+      "milestones": [
+        "App launches offline",
+        "Basic CRUD operations work",
+        "Formulas can be called from frontend"
+      ]
+    },
+    {
+      "phase": 1,
+      "duration": "2-3 months",
+      "name": "Foundational Modules",
+      "deliverables": [
+        "Campaign Canvas (basic)",
+        "Predictive Scheduler",
+        "Social media publishing",
+        "3-4 core formulas implemented"
+      ],
+      "milestones": [
+        "Schedule and publish posts",
+        "See formula predictions in UI",
+        "Work fully offline"
+      ]
+    },
+    {
+      "phase": 2,
+      "duration": "2-3 months",
+      "name": "Intelligence Layer",
+      "deliverables": [
+        "6-8 core formulas complete",
+        "Dashboard with real formula widgets",
+        "Studio module with local file access",
+        "Cloud bridge for external data"
+      ],
+      "milestones": [
+        "All formulas operational",
+        "Predictive insights visible everywhere",
+        "Sync with cloud for external data"
+      ]
+    },
+    {
+      "phase": 3,
+      "duration": "2-3 months",
+      "name": "Advanced Orchestration",
+      "deliverables": [
+        "Budget Orchestrator",
+        "Partner Hub",
+        "Complete formula set (16)",
+        "Advanced collaboration features"
+      ],
+      "milestones": [
+        "Automated optimization suggestions",
+        "Full campaign-to-revenue visibility",
+        "Team collaboration working"
+      ]
+    },
+    {
+      "phase": 4,
+      "duration": "1-2 months",
+      "name": "Polish & Scale",
+      "deliverables": [
+        "Plugin marketplace stub",
+        "Performance optimization",
+        "Advanced offline capabilities",
+        "Production hardening"
+      ],
+      "milestones": [
+        "App feels fast and responsive",
+        "All features work seamlessly offline",
+        "Ready for beta testing"
+      ]
+    }
+  ],
+  
+  "current_frontend_code": {
+    "file": "AstraWorkbench.jsx",
+    "status": "Initial UI complete",
+    "components_implemented": [
+      "Dashboard with metric cards",
+      "Studio module with creation tools",
+      "Basic navigation sidebar",
+      "Placeholder canvas and scheduler"
+    ],
+    "needed_integrations": [
+      "Tauri command bindings",
+      "Real formula calculations",
+      "Local data persistence",
+      "Sync status indicators"
+    ]
+  },
+  
+  "next_immediate_steps": [
+    "Initialize Tauri in existing React project",
+    "Create Rust backend structure",
+    "Implement first formula (Tap10 #3)",
+    "Connect dashboard metrics to real calculations",
+    "Add SQLite for local storage",
+    "Implement basic sync engine",
+    "Connect Studio module to local file system"
+  ],
+  
+  "critical_integration_points": {
+    "frontend_to_backend": "Tauri invoke() commands",
+    "formula_calculation": "Rust functions called from React via Tauri",
+    "data_persistence": "SQLite via Diesel ORM",
+    "sync_operations": "Custom Rust sync engine with cloud bridge",
+    "external_apis": "Cloud bridge acts as secure proxy"
+  },
+  
+  "formula_to_feature_mapping": {
+    "Campaign_Health": "CIM #9 (Compositional Integrity Matrix)",
+    "Content_Scoring": "Tap10 #3 (Wasserstein distance ranking)",
+    "Reach_Prediction": "NDP #11 (Network Diffusion Propagator)",
+    "Risk_Assessment": "RPS #5 (Orlicz Space risk scoring)",
+    "Partner_Matching": "PCS #4 (RKHS Maximum Mean Discrepancy)",
+    "Budget_Optimization": "One-Knob #8 (Fréchet derivative sensitivity)",
+    "Learning_Validation": "SAM #12 (P-statistical convergence)",
+    "System_Evolution": "GCF #10 (Geometric conservation flow)"
+  }
+}
+```
