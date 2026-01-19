@@ -1,0 +1,367 @@
+```json
+{
+  "formula_integration_blueprint": {
+    "overview": {
+      "criticality": "Extreme - This is the core intellectual property and differentiator",
+      "time_estimate": "10-14 weeks of intensive mathematical implementation",
+      "risk_level": "High (mathematical correctness is non-negotiable)",
+      "description": "Implementing all 16 advanced mathematical formulas from source papers into a performant Rust engine, with proper validation, testing, and frontend integration."
+    },
+
+    "formula_implementation_breakdown": {
+      "CIM_9_Compositional_Integrity_Matrix": {
+        "source": "Aldrovandi - Bell Matrices and Combinatorics",
+        "time_required": "2 weeks",
+        "complexity": "Very High",
+        "rust_implementation": {
+          "file": "src/engine/composition.rs",
+          "dependencies": ["ndarray", "nalgebra", "num-complex"],
+          "functions": [
+            "bell_matrix_linearization(f: Series, g: Series) -> Matrix",
+            "calculate_compositional_integrity(campaign_dag: Graph) -> f64",
+            "sensitivity_analysis(components: Vec<Component>) -> SensitivityMap"
+          ],
+          "challenges": [
+            "Implementing partial Bell polynomials efficiently",
+            "Handling infinite series truncation with error bounds",
+            "Matrix exponentiation for large state spaces"
+          ]
+        },
+        "testing_requirements": [
+          "Verify linearization property: B[f∘g] = B[f]·B[g]",
+          "Test with known function compositions",
+          "Validate against combinatorial explosion cases"
+        ]
+      },
+
+      "Tap10_3_Wasserstein_Scoring": {
+        "source": "Optimal Transport Theory",
+        "time_required": "1.5 weeks",
+        "complexity": "High",
+        "rust_implementation": {
+          "file": "src/engine/validation.rs",
+          "dependencies": ["optimal_transport", "statrs", "ndarray"],
+          "functions": [
+            "wasserstein_distance_2(dist1: Distribution, dist2: Distribution) -> f64",
+            "tap10_score(current: Dist, ideal: Dist, anti_ideal: Dist) -> f64",
+            "calculate_earth_movers_distance(matrix1: Array2, matrix2: Array2) -> f64"
+          ],
+          "challenges": [
+            "Efficient Earth Mover's Distance calculation for high dimensions",
+            "Handling continuous vs discrete distributions",
+            "Memory optimization for large feature vectors"
+          ]
+        }
+      },
+
+      "NDP_11_Network_Diffusion_Propagator": {
+        "source": "Spectral Graph Theory (Nelson)",
+        "time_required": "2 weeks",
+        "complexity": "High",
+        "rust_implementation": {
+          "file": "src/engine/network.rs",
+          "dependencies": ["petgraph", "nalgebra", "approx"],
+          "functions": [
+            "graph_laplacian(adjacency: Matrix) -> Matrix",
+            "heat_kernel_exponential(laplacian: Matrix, time: f64) -> Matrix",
+            "diffusion_propagator(graph: Graph, initial: Vector, time_steps: Vec<f64>) -> Vec<Vector>"
+          ],
+          "challenges": [
+            "Matrix exponential computation for large graphs",
+            "Sparse matrix representation for efficiency",
+            "Multi-scale diffusion analysis"
+          ]
+        },
+        "optimization_requirements": [
+          "Use sparse matrix formats for graphs with 10k+ nodes",
+          "Implement approximate matrix exponential via Krylov subspace",
+          "Cache frequently used propagators"
+        ]
+      },
+
+      "RPS_5_Risk_Protocol_Score": {
+        "source": "Orlicz Spaces & Convex Analysis",
+        "time_required": "1.5 weeks",
+        "complexity": "High",
+        "rust_implementation": {
+          "file": "src/engine/decision.rs",
+          "dependencies": ["statrs", "rand", "special-functions"],
+          "functions": [
+            "luxemburg_norm(distribution: Distribution, young_function: YoungFunction) -> f64",
+            "calculate_tail_risk(returns: Vec<f64>, confidence: f64) -> f64",
+            "orlicz_space_metric(roi_dist: Dist, risk_params: Params) -> f64"
+          ],
+          "challenges": [
+            "Implementing Young functions for heavy-tailed distributions",
+            "Numerical stability in tail probability calculations",
+            "Calibrating risk measures to real-world data"
+          ]
+        }
+      },
+
+      "GCF_10_Geometric_Conservation_Flow": {
+        "source": "Geometric Mechanics (Holm)",
+        "time_required": "2.5 weeks",
+        "complexity": "Extreme",
+        "rust_implementation": {
+          "file": "src/engine/dynamics.rs",
+          "dependencies": ["nalgebra", "diff-geom", "ode-solvers"],
+          "functions": [
+            "euler_poincare_reduction(lagrangian: Function, symmetry_group: Group) -> ReducedSystem",
+            "calculate_momentum_map(velocity: Vector, reduced_lagrangian: Function) -> Vector",
+            "geometric_conservation_flow(initial_state: State, time_steps: usize) -> Vec<State>"
+          ],
+          "challenges": [
+            "Implementing Lie algebra operations in Rust",
+            "Numerical integration on manifolds",
+            "Handling symmetry breaking cases"
+          ],
+          "notes": "This is the most mathematically sophisticated formula - consider consulting with a mathematical physicist"
+        }
+      },
+
+      "SAM_12_Statistical_Approximation_Metric": {
+        "source": "Approximation Theory (Gürbüz)",
+        "time_required": "1.5 weeks",
+        "complexity": "High",
+        "rust_implementation": {
+          "file": "src/engine/validation.rs",
+          "dependencies": ["statrs", "num-traits", "special-functions"],
+          "functions": [
+            "p_statistical_convergence(operators: Vec<Operator>, target: Function) -> bool",
+            "korovkin_test(functions: Vec<Function>, test_functions: Vec<Function>) -> f64",
+            "approximation_fidelity(model: Model, data: Dataset, power: f64) -> f64"
+          ],
+          "challenges": [
+            "Implementing P-statistical convergence (density-based)",
+            "Handling outliers in convergence testing",
+            "Validating against Korovkin-type theorems"
+          ]
+        }
+      },
+
+      "remaining_formulas_summary": {
+        "One_Knob_8_Frechet_Derivative": {
+          "time": "1 week",
+          "complexity": "Medium-High",
+          "key_function": "frechet_derivative(functional: Functional, perturbation: Vector) -> f64"
+        },
+        "Reinforcement_1_Bochner_Integral": {
+          "time": "1.5 weeks",
+          "complexity": "High",
+          "key_function": "bochner_integral(kernel: Kernel, measure: Measure, history: Vector) -> f64"
+        },
+        "PCS_4_RKHS_Embedding": {
+          "time": "1 week",
+          "complexity": "Medium",
+          "key_function": "maximum_mean_discrepancy(dist1: Dist, dist2: Dist, kernel: Kernel) -> f64"
+        },
+        "PW_6_Choquet_Integral": {
+          "time": "1 week",
+          "complexity": "Medium",
+          "key_function": "choquet_integral(capacity: Capacity, values: Vector) -> f64"
+        },
+        "5000_PT_7_Levy_Process": {
+          "time": "1.5 weeks",
+          "complexity": "High",
+          "key_function": "ito_levy_decomposition(process: Process) -> (Drift, Diffusion, Jump)"
+        },
+        "Recursive_IP_2_Contraction_Mapping": {
+          "time": "1 week",
+          "complexity": "Medium",
+          "key_function": "banach_fixed_point(operator: Operator, initial: Vector, tolerance: f64) -> Vector"
+        }
+      }
+    },
+
+    "cross_formula_challenges": {
+      "numerical_stability": {
+        "issues": ["Floating point error accumulation", "Ill-conditioned matrices", "Underflow/overflow in exponentials"],
+        "solutions": [
+          "Use f64 with error bounds tracking",
+          "Implement condition number checking",
+          "Apply logarithmic scaling where appropriate",
+          "Use arbitrary precision for critical calculations"
+        ]
+      },
+      "performance_optimization": {
+        "bottlenecks": ["Matrix exponentials", "Graph algorithms on large networks", "High-dimensional integrals"],
+        "optimizations": [
+          "GPU acceleration via CUDA/Rust bindings for matrix operations",
+          "Sparse data structures for network calculations",
+          "Monte Carlo methods with variance reduction",
+          "Memoization and caching of intermediate results"
+        ]
+      },
+      "validation_verification": {
+        "approach": "Mathematical proof + empirical testing",
+        "methods": [
+          "Compare with known analytical solutions",
+          "Implement reference versions in Python/Mathematica",
+          "Test against edge cases from source papers",
+          "Verify conservation laws and invariants"
+        ]
+      }
+    },
+
+    "frontend_integration_architecture": {
+      "tauri_commands": {
+        "template": "async fn calculate_{formula_name}(state: State<AppState>, params: FormulaParams) -> Result<FormulaResult, Error>",
+        "expected_commands": 16,
+        "input_serialization": "serde_json for complex mathematical structures",
+        "output_caching": "SQLite with input hash as key for result reuse"
+      },
+
+      "real_time_formula_widgets": {
+        "dashboard_widgets": [
+          {
+            "widget": "CampaignHealthGauge",
+            "formula": "CIM #9",
+            "update_frequency": "On campaign modification",
+            "visualization": "Circular gauge with confidence interval"
+          },
+          {
+            "widget": "RiskHeatmap",
+            "formula": "RPS #5 + NDP #11",
+            "update_frequency": "Real-time with market data",
+            "visualization": "Interactive network graph with risk coloring"
+          },
+          {
+            "widget": "ContentOptimizer",
+            "formula": "Tap10 #3 + SAM #12",
+            "update_frequency": "On content change",
+            "visualization": "Multi-dimensional quality radar chart"
+          }
+        ]
+      },
+
+      "formula_parameter_ui": {
+        "slider_controls": [
+          "Time horizon for NDP diffusion",
+          "Risk aversion coefficient for RPS",
+          "Wasserstein weight parameters for Tap10"
+        ],
+        "matrix_inputs": [
+          "Adjacency matrix editor for network graphs",
+          "Covariance matrix input for risk calculations",
+          "Transition probability matrices"
+        ],
+        "function_inputs": [
+          "Lagrangian definition for GCF",
+          "Kernel functions for RKHS embeddings",
+          "Young functions for Orlicz spaces"
+        ]
+      }
+    },
+
+    "testing_validation_framework": {
+      "mathematical_correctness": {
+        "method": "Comparison with published results in source papers",
+        "tolerance": "1e-10 relative error for deterministic formulas",
+        "test_cases": "50+ per formula from literature examples"
+      },
+      "performance_benchmarking": {
+        "targets": [
+          "Calculate campaign health for 1000-node DAG in < 100ms",
+          "Diffusion on 10k-node network in < 500ms",
+          "Real-time risk updates in < 50ms"
+        ],
+        "hardware_baseline": "M1 MacBook Pro, 16GB RAM"
+      },
+      "integration_testing": {
+        "scenarios": [
+          "Formulas chain correctly (e.g., NDP output feeds into RPS)",
+          "Offline calculation matches online sync results",
+          "Formula caching prevents redundant computation"
+        ]
+      }
+    },
+
+    "development_roadmap": {
+      "phase_1_foundation": {
+        "duration": "3 weeks",
+        "focus": "Implement 5 core formulas (Tap10, CIM, NDP, RPS, SAM)",
+        "deliverables": [
+          "Mathematical engine skeleton",
+          "Basic Tauri command interface",
+          "Dashboard integration for key metrics"
+        ]
+      },
+      "phase_2_completion": {
+        "duration": "4 weeks",
+        "focus": "Implement remaining 11 formulas",
+        "deliverables": [
+          "All 16 formulas operational",
+          "Advanced visualization widgets",
+          "Performance optimization layer"
+        ]
+      },
+      "phase_3_integration": {
+        "duration": "3 weeks",
+        "focus": "Cross-formula workflows and optimization",
+        "deliverables": [
+          "Formula chaining and composition",
+          "Real-time predictive analytics",
+          "Production-ready validation suite"
+        ]
+      },
+      "phase_4_polish": {
+        "duration": "2 weeks",
+        "focus": "User experience and edge cases",
+        "deliverables": [
+          "Interactive formula parameter tuning",
+          "Comprehensive error handling",
+          "Performance at scale"
+        ]
+      }
+    },
+
+    "expertise_requirements": {
+      "mathematics": [
+        "Functional Analysis (Bochner integrals, Banach spaces)",
+        "Differential Geometry (Lie groups, manifolds)",
+        "Probability Theory (Levy processes, Orlicz spaces)",
+        "Graph Theory (Spectral methods, diffusion)",
+        "Approximation Theory (Korovkin theorems)"
+      ],
+      "programming": [
+        "Rust with numerical computing experience",
+        "GPU programming (CUDA/Vulkan)",
+        "Algorithm optimization for mathematical code",
+        "Testing and validation of numerical methods"
+      ],
+      "team_composition": {
+        "mathematical_physicist": "For GCF and advanced geometric methods",
+        "numerical_analyst": "For stability and optimization",
+        "rust_engineer": "For implementation and performance",
+        "qa_specialist": "For mathematical validation"
+      }
+    },
+
+    "risk_mitigation_strategies": {
+      "formula_complexity": [
+        "Start with reference implementation in Python/Julia",
+        "Validate against multiple independent calculations",
+        "Implement progressive complexity (simplified → full)"
+      ],
+      "performance_concerns": [
+        "Profile early and often with realistic data sizes",
+        "Implement fallback algorithms for different scales",
+        "Design for parallelization from the beginning"
+      ],
+      "correctness_uncertainty": [
+        "Maintain direct correspondence to source paper equations",
+        "Create visualization tools to sanity-check outputs",
+        "Implement confidence intervals on all calculations"
+      ]
+    },
+
+    "success_metrics": {
+      "mathematical": "All formulas produce results within 1e-8 of reference implementations",
+      "performance": "90th percentile calculation time < 100ms for typical workloads",
+      "usability": "Users can interpret formula outputs without mathematical training",
+      "reliability": "Zero calculation errors in production (with graceful degradation)"
+    }
+  }
+}
+```
