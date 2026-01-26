@@ -1,0 +1,430 @@
+```json
+{
+  "formula_system_architecture": {
+    "core_structure": {
+      "engine_directory": "src-tauri/src/engine/",
+      "module_structure": {
+        "composition.rs": {
+          "responsibility": "Compositional Integrity & Recursive Systems",
+          "formulas": ["CIM #9", "Recursive IP #2"],
+          "mathematical_foundation": ["Bell Matrices", "Contraction Mapping Theorem"],
+          "required_crates": ["ndarray", "nalgebra", "num-complex", "approx"],
+          "entry_points": {
+            "calculate_compositional_integrity": "Main CIM calculation",
+            "bell_matrix_linearization": "Convert compositions to linear algebra",
+            "recursive_ip_solver": "Fixed-point iteration for IP optimization"
+          }
+        },
+        "dynamics.rs": {
+          "responsibility": "Geometric Mechanics & Stochastic Processes",
+          "formulas": ["GCF #10", "5000-Point Tracker #7"],
+          "mathematical_foundation": ["Euler-Poincaré Reduction", "Itô-Lévy Decomposition"],
+          "required_crates": ["nalgebra", "rand", "statrs", "ode-solvers", "statistical"],
+          "entry_points": {
+            "geometric_conservation_flow": "Calculate flow on manifolds",
+            "levy_process_decomposition": "Separate drift, diffusion, jumps",
+            "momentum_map_evolution": "Track conserved quantities"
+          }
+        },
+        "network.rs": {
+          "responsibility": "Graph Theory & Diffusion",
+          "formulas": ["NDP #11"],
+          "mathematical_foundation": ["Spectral Graph Theory", "Heat Kernel"],
+          "required_crates": ["petgraph", "sprs", "nalgebra", "approx"],
+          "entry_points": {
+            "graph_laplacian": "Construct Laplacian from adjacency",
+            "heat_kernel_exponential": "Compute exp(-tL) efficiently",
+            "diffusion_propagator": "Simulate spread through network",
+            "influence_centrality": "Identify key nodes via diffusion"
+          }
+        },
+        "validation.rs": {
+          "responsibility": "Statistical Validation & Ranking",
+          "formulas": ["SAM #12", "Tap10 #3"],
+          "mathematical_foundation": ["P-Statistical Convergence", "Wasserstein Geometry"],
+          "required_crates": ["statrs", "optimal-transport", "ndarray", "num-traits"],
+          "entry_points": {
+            "p_statistical_convergence": "Check convergence with outliers",
+            "wasserstein_distance": "Earth Mover's Distance calculation",
+            "tap10_score": "Rank via Wasserstein to ideal/anti-ideal",
+            "korovkin_test": "Validate approximation operators"
+          }
+        },
+        "decision.rs": {
+          "responsibility": "Risk Assessment & Partner Matching",
+          "formulas": ["PCS #4", "RPS #5", "PW #6"],
+          "mathematical_foundation": ["RKHS Theory", "Orlicz Spaces", "Choquet Integration"],
+          "required_crates": ["kernel-methods", "statrs", "special-functions", "rand"],
+          "entry_points": {
+            "maximum_mean_discrepancy": "RKHS-based distribution distance",
+            "luxemburg_norm": "Orlicz space norm for heavy tails",
+            "choquet_integral": "Non-additive expectation",
+            "partner_criteria_score": "Rank partners via MMD"
+          }
+        },
+        "optimization.rs": {
+          "responsibility": "Sensitivity Analysis & Control",
+          "formulas": ["One-Knob #8", "Reinforcement #1"],
+          "mathematical_foundation": ["Fréchet Derivative", "Bochner Integral"],
+          "required_crates": ["nalgebra", "statrs", "integral", "num-derive"],
+          "entry_points": {
+            "frechet_derivative": "Infinite-dimensional gradient",
+            "bochner_integral": "Banach-space valued integration",
+            "sensitivity_analysis": "Parameter importance ranking",
+            "reinforcement_protocol": "RKHS-based reward integration"
+          }
+        },
+        "common.rs": {
+          "responsibility": "Shared mathematical utilities",
+          "functions": [
+            "matrix_exponential",
+            "numerical_differentiation",
+            "statistical_moments",
+            "graph_operations",
+            "error_propagation"
+          ]
+        }
+      }
+    },
+
+    "build_configuration": {
+      "cargo_toml_dependencies": {
+        "ndarray": "0.15.6",
+        "nalgebra": "0.32.2",
+        "petgraph": "0.6.3",
+        "sprs": "0.11.0",
+        "statrs": "0.16.0",
+        "optimal-transport": "0.3.0",
+        "rand": "0.8.5",
+        "approx": "0.5.1",
+        "num-complex": "0.4.3",
+        "num-traits": "0.2.16",
+        "ode-solvers": "0.5.0",
+        "kernel-methods": "0.5.0",
+        "special-functions": "0.2.0",
+        "integral": "0.4.0",
+        "num-derive": "0.4.0"
+      },
+      "feature_flags": {
+        "gpu_acceleration": {
+          "enabled": false,
+          "crates": ["cuda", "opencl"],
+          "formulas_benefiting": ["CIM #9", "NDP #11", "Tap10 #3"],
+          "performance_gain": "10-100x for large matrices"
+        },
+        "high_precision": {
+          "enabled": true,
+          "crates": ["rug", "num-bigfloat"],
+          "precision_level": "256-bit floating point",
+          "use_cases": ["Financial risk calculations", "Long-term simulations"]
+        },
+        "parallel_computation": {
+          "enabled": true,
+          "crates": ["rayon", "crossbeam"],
+          "parallelizable_operations": [
+            "Matrix multiplication",
+            "Monte Carlo simulations",
+            "Graph traversals",
+            "Statistical sampling"
+          ]
+        }
+      },
+      "compiler_optimizations": {
+        "release_profile": {
+          "opt_level": 3,
+          "lto": true,
+          "codegen_units": 1,
+          "panic": "abort"
+        },
+        "target_cpu": "native",
+        "simd_optimizations": true,
+        "inline_threshold": 275
+      }
+    },
+
+    "coding_patterns_and_conventions": {
+      "error_handling": {
+        "error_type": "FormulaError",
+        "variants": [
+          "NumericalInstability",
+          "ConvergenceFailure",
+          "InvalidInput",
+          "DimensionMismatch",
+          "OutOfMemory",
+          "Timeout"
+        ],
+        "recovery_strategies": {
+          "NumericalInstability": "Switch to higher precision or different algorithm",
+          "ConvergenceFailure": "Increase iterations or adjust parameters",
+          "InvalidInput": "Return descriptive error with validation hints"
+        }
+      },
+      "numerical_stability": {
+        "default_precision": "f64",
+        "epsilon": "1e-12",
+        "condition_number_threshold": "1e10",
+        "ill_conditioned_handling": "Regularization or algorithm switch",
+        "underflow_overflow": "Logarithmic scaling where applicable"
+      },
+      "memory_management": {
+        "large_matrix_strategy": "Sparse representation when > 80% zeros",
+        "cache_strategy": "LRU cache for expensive intermediate results",
+        "lazy_evaluation": "For chained formulas, compute only when needed",
+        "batch_processing": "Process in chunks to avoid OOM"
+      },
+      "api_design": {
+        "function_signatures": {
+          "pattern": "fn formula_name(params: FormulaParams) -> Result<FormulaResult, FormulaError>",
+          "example": "fn tap10_score(current: &[f64], ideal: &[f64], anti_ideal: &[f64]) -> Result<f64, FormulaError>"
+        },
+        "immutability": "All inputs are borrowed unless transformation needed",
+        "thread_safety": "All formulas are Send + Sync where possible"
+      }
+    },
+
+    "implementation_sequence": {
+      "phase_1_basics": {
+        "week": "1-2",
+        "tasks": [
+          "Set up common mathematical utilities",
+          "Implement Tap10 #3 (Wasserstein distance)",
+          "Implement basic matrix operations",
+          "Create error handling framework"
+        ],
+        "deliverables": [
+          "common.rs with tested utilities",
+          "validation.rs with working Tap10",
+          "Basic test suite"
+        ]
+      },
+      "phase_2_core_formulas": {
+        "week": "3-6",
+        "tasks": [
+          "Implement CIM #9 (Bell matrices)",
+          "Implement NDP #11 (Graph diffusion)",
+          "Implement RPS #5 (Orlicz spaces)",
+          "Add caching layer",
+          "Performance optimization"
+        ],
+        "deliverables": [
+          "composition.rs with CIM",
+          "network.rs with heat kernel",
+          "decision.rs with risk scoring",
+          "Benchmark suite"
+        ]
+      },
+      "phase_3_advanced_mathematics": {
+        "week": "7-10",
+        "tasks": [
+          "Implement GCF #10 (Geometric mechanics)",
+          "Implement SAM #12 (P-statistical convergence)",
+          "Implement 5000-PT #7 (Stochastic calculus)",
+          "Add high-precision mode",
+          "GPU acceleration for key operations"
+        ],
+        "deliverables": [
+          "dynamics.rs with all formulas",
+          "validation.rs complete",
+          "GPU-accelerated matrix operations",
+          "Production-ready numerical stability"
+        ]
+      },
+      "phase_4_integration": {
+        "week": "11-12",
+        "tasks": [
+          "Implement remaining formulas",
+          "Cross-formula validation",
+          "Real-time optimization",
+          "Comprehensive error recovery",
+          "Documentation and examples"
+        ],
+        "deliverables": [
+          "All 16 formulas operational",
+          "Formulas can be chained",
+          "Interactive debugging tools",
+          "Complete API documentation"
+        ]
+      }
+    },
+
+    "testing_framework": {
+      "unit_tests": {
+        "coverage_target": "90%",
+        "test_types": [
+          "Mathematical correctness (vs known results)",
+          "Numerical stability (edge cases)",
+          "Performance benchmarks",
+          "Memory usage verification"
+        ],
+        "fixtures": [
+          "Test datasets from source papers",
+          "Synthetic worst-case scenarios",
+          "Real-world marketing data samples"
+        ]
+      },
+      "property_based_tests": {
+        "using": "proptest",
+        "properties": [
+          "Formulas are invariant under scaling (where appropriate)",
+          "Commutativity/associativity of operations",
+          "Error bounds hold under perturbation",
+          "Monotonicity where expected"
+        ]
+      },
+      "integration_tests": {
+        "scenarios": [
+          "Formula chaining: NDP → RPS → Tap10",
+          "Offline calculation matches online",
+          "Large dataset processing",
+          "Concurrent formula execution"
+        ]
+      },
+      "performance_tests": {
+        "benchmarks": {
+          "small": "100 data points, < 10ms",
+          "medium": "10,000 data points, < 100ms",
+          "large": "1,000,000 data points, < 1s",
+          "huge": "Graph with 100k nodes, < 5s"
+        },
+        "monitoring": "Continuous benchmarking in CI"
+      }
+    },
+
+    "tauri_integration_layer": {
+      "command_definition": {
+        "pattern": "#[tauri::command]\nasync fn formula_name(state: State<EngineState>, params: Json<FormulaParams>) -> Result<Json<FormulaResult>, String>",
+        "example": "#[tauri::command]\nasync fn calculate_campaign_health(state: State<EngineState>, campaign: Json<CampaignData>) -> Result<Json<HealthScore>, String> {\n    let result = state.engine.calculate_compositional_integrity(&campaign).await?;\n    Ok(Json(result))\n}"
+      },
+      "state_management": {
+        "struct": "EngineState",
+        "fields": {
+          "engine": "Arc<FormulaEngine>",
+          "cache": "LruCache<FormulaKey, FormulaResult>",
+          "precision_mode": "PrecisionLevel"
+        },
+        "thread_safety": "Mutex for mutable state, RwLock for shared"
+      },
+      "event_system": {
+        "formula_progress": "Emit progress during long calculations",
+        "cache_hit_miss": "Track cache performance",
+        "error_events": "Broadcast formula errors for UI display"
+      }
+    },
+
+    "formula_caching_system": {
+      "cache_key_structure": {
+        "components": ["formula_id", "input_hash", "precision_level", "algorithm_version"],
+        "input_hash": "blake3 hash of serialized inputs",
+        "invalidation": "When algorithm updates or data changes substantially"
+      },
+      "cache_layers": {
+        "l1": "In-memory LRU cache (1000 entries)",
+        "l2": "SQLite cache on disk (persistent across sessions)",
+        "l3": "Precomputed results for common scenarios"
+      },
+      "cache_optimization": {
+        "warmup": "Precompute common formulas on startup",
+        "predictive_caching": "Cache likely next calculations",
+        "garbage_collection": "Remove stale or rarely used entries"
+      }
+    },
+
+    "mathematical_validation_suite": {
+      "reference_implementations": {
+        "python": "Using numpy/scipy for comparison",
+        "mathematica": "For complex symbolic validation",
+        "known_results": "From source paper examples"
+      },
+      "validation_checks": {
+        "unit_tests": "Compare with analytical solutions",
+        "convergence_tests": "Verify formulas converge as expected",
+        "invariant_checks": "Preserved quantities remain constant",
+        "sanity_checks": "Outputs in reasonable ranges"
+      },
+      "error_bound_calculation": {
+        "absolute_error": "|rust_impl - reference|",
+        "relative_error": "|rust_impl - reference| / |reference|",
+        "ulp_error": "Units in last place for floating point"
+      }
+    },
+
+    "deployment_configuration": {
+      "build_targets": {
+        "windows": {
+          "target": "x86_64-pc-windows-msvc",
+          "optimization": "Max speed",
+          "dll_handling": "Static linking where possible"
+        },
+        "macos": {
+          "target": "x86_64-apple-darwin / aarch64-apple-darwin",
+          "accelerate_framework": "Use for BLAS operations"
+        },
+        "linux": {
+          "target": "x86_64-unknown-linux-gnu",
+          "openblas": "Link against system BLAS"
+        }
+      },
+      "size_optimization": {
+        "strip_symbols": true,
+        "compress_binary": true,
+        "tree_shaking": "Remove unused formula code",
+        "feature_selection": "Only include formulas user needs"
+      },
+      "update_mechanism": {
+        "formula_updates": "Can update mathematical logic without app update",
+        "algorithm_improvements": "Download optimized implementations",
+        "bug_fixes": "Hotfix critical numerical issues"
+      }
+    },
+
+    "critical_implementation_details": {
+      "CIM_9_implementation": {
+        "bell_matrix_size": "Dynamic based on series truncation",
+        "storage_format": "Lower triangular packed storage",
+        "multiplication": "Custom algorithm exploiting triangular structure",
+        "composition_rule": "Verify B[f∘g] = B[f]·B[g] within tolerance"
+      },
+      "NDP_11_implementation": {
+        "laplacian_construction": "Support directed/undirected, weighted/unweighted",
+        "matrix_exponential": "Use scaling and squaring with Padé approximation",
+        "sparse_handling": "Use sprs for graphs > 1000 nodes",
+        "diffusion_simulation": "Support multiple time steps efficiently"
+      },
+      "GCF_10_implementation": {
+        "lie_algebra_representation": "Matrix representation for common groups",
+        "numerical_integrator": "Runge-Kutta 4/5 with adaptive step size",
+        "conservation_monitoring": "Track momentum map deviation",
+        "symmetry_handling": "Support symmetry breaking cases"
+      },
+      "Tap10_3_implementation": {
+        "wasserstein_calculation": "Use Sinkhorn algorithm for efficiency",
+        "distribution_support": "Discrete and 1D continuous distributions",
+        "memory_optimization": "Process large histograms in chunks",
+        "gradient_computation": "For optimization use cases"
+      }
+    },
+
+    "development_workflow": {
+      "git_branch_strategy": {
+        "main": "Production-ready code only",
+        "develop": "Integration branch",
+        "feature/formula-*": "Individual formula implementation",
+        "feature/optimization-*": "Performance improvements"
+      },
+      "code_review_checklist": [
+        "Mathematical correctness verified",
+        "Numerical stability analyzed",
+        "Performance benchmarks included",
+        "Error handling comprehensive",
+        "Tests cover edge cases",
+        "Documentation updated"
+      ],
+      "ci_cd_pipeline": {
+        "on_pr": ["Run unit tests", "Check performance regressions", "Verify numerical stability"],
+        "on_merge": ["Run full test suite", "Build all targets", "Update documentation"],
+        "nightly": ["Run extensive benchmarks", "Test with large datasets", "Fuzz testing"]
+      }
+    }
+  }
+}
+```
